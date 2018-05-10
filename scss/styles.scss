@@ -1,0 +1,57 @@
+$black-color: black;
+$clear-color: #AC3939;
+$equals-color: #004466;
+$operator-color: #666666;
+$decimal-color: #666666;
+$number-color: #4D4D4D;
+
+body {
+  text-align: center;
+}
+
+#display {
+  background-color: $black-color;
+  // also border
+}
+
+#clear {
+  background-color: $clear-color;
+}
+
+#equals {
+  background-color: $equals-color;
+}
+
+.operator {
+  background-color: $operator-color;
+}
+
+#decimal {
+  background-color: $decimal-color;
+}
+
+.number {
+  background-color: $number-color;
+}
+
+// phone/default
+
+body { // NO!! must use container for calc, and header/footer is not in it.
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 641px) {
+
+// tablet-specific rulesets go here
+
+} /*end of media query */
+
+@media only screen and (min-width: 1141px) {
+  // desktop-specific rulesets go here
+
+  body {
+    width: 25%;
+  }
+  
+  } /*end of media query */

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  
+<head>
+  <title>Calculator (FCC Beta) (jQuery)</title>
+  <meta name="description" content="FCC Beta Calculator Challenge (using jQuery)" />
+  <meta charset="utf-8">
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- *************** LOAD THE GOOGLE FONT ****************** -->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600'
+        rel='stylesheet' type='text/css'>
+  
+  <!-- Latest compiled and minified Bootstrap CSS -->
+  <!-- If updating the version, cut and paste the whole incantation or it will fail -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional Bootstrap theme -->
+  <!-- If updating the version, cut and paste the whole incantation or it will fail -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+  <!-- Font Awesome if desired --> 
+  <!-- <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+  
+  <!--jQuery UI if needed - note the associated JS link toward the end of <body>-->
+  <!--<link rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
+  
+  <!--Then your own css--> 
+  <link href="css/styles.css" rel="stylesheet" type="text/css" >
+  
+  <!--Note all JS is below including jQuery-->
+   
+</head>
+
+<body>
+
+  <h2>JavaScript Calculator freeCodeCamp Challenge</h2>
+
+  <div id="display">0</div>
+  <div id="clear">AC</div>
+  <div class="operator" id="divide">/</div>
+  <div class="operator" id="multiply">X</div>
+  <div class="operator" id="subtract">-</div>
+  <div class="operator" id="add">+</div>
+  <div class="operator" id="equals">=</div>
+  <div id="decimal">.</div>
+  <div class="number" id="seven">7</div>
+  <div class="number" id="eight">8</div>
+  <div class="number" id="nine">9</div>
+  <div class="number" id="four">4</div>
+  <div class="number" id="five">5</div>
+  <div class="number" id="six">6</div>
+  <div class="number" id="one">1</div>
+  <div class="number" id="two">2</div>
+  <div class="number" id="three">3</div>
+  <div class="number" id="zero">0</div>
+
+  <!-- must stick footer to bottom on desktop
+       possibly render invisible on phone -->
+  <footer><!-- standard dcc footer -->
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script>
+       Donald Cameron - all rights reserved</p>
+    <p>A big thanks to <a href="http://www.freecodecamp.com/map">Free Code Camp</a></p>
+  </footer>
+  
+  <!-- scripts go at the bottom of <body> so as not to delay initial page loading and display -->
+    
+  <!-- LOAD LATEST JQUERY-->
+  <!-- https://developers.google.com/speed/libraries/devguide#jquery -->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!--jQuery UI if needed - Note the associated CSS link in <head>-->
+  <!--<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
+
+  <!-- Latest Bootstrap compiled and minified JavaScript (requires jQuery) -->
+  <!-- If updating the version, cut and paste the whole incantation or it will fail -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- Site-specific JavaScript -->
+  <script src="js/scripts.js"></script> 
+  
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+
+  <!-- FCC new testing setup -->
+  <script src="https://gitcdn.link/repo/freeCodeCamp/testable-projects-fcc/master/build/bundle.js"></script> </script>
+  <!-- <script> src="https://rawgit.com/freeCodeCamp/testable-projects-fcc/master/build/bundle.js" </script> -->
+   
+</body>
+
+</html>
+  
