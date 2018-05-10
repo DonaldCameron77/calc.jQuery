@@ -1,57 +1,162 @@
+// boilerplate
+
+/*-----Prevents iPhone from resizing in landscape mode -----*/
+/* html {-webkit-text-size-adjust: none; } */
+html {-webkit-text-size-adjust: 100%; } /* see J.Seric foundation article on why this rather than 'none' */
+
+/*----------- apply a natural box layout model to all elements --------------*/
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/*--------- stop Chrome from putting blue outline around selected clicked items --------*/
+:focus { outline: 0; }
+
+html, body {
+  user-select: none;
+}
+
+// we should insert a reset here (?)
+
+// computer (checkbook) font for display
+/* Bitwise checkbook font for header h1 */
+@font-face{
+  font-family: "Bitwise";
+  src: url('../fonts/bitwise.ttf'),
+  url('../fonts/bitwise.ttf'); /* IE */
+}
+
+// colors
 $black-color: black;
+$border-black: #303030;
 $clear-color: #AC3939;
 $equals-color: #004466;
 $operator-color: #666666;
-$decimal-color: #666666;
+
 $number-color: #4D4D4D;
+$decimal-color: $number-color;
+$text-color: white;
+
+// sizes
+$standard-height: 16.66%; // 1/6 of the total, with a little slop
+$standard-width: 25%;
+$double-width: $standard-width * 2;
 
 body {
+  font-family: 'Open Sans', sans-serif;
+	font-weight: 300;	/*also loaded 600 for bold*/
   text-align: center;
 }
 
+// calculator proper - excludes heading and footer
+
+#calculator {
+  border: 5px solid $border-black;
+  border-radius: 5px;
+  color: $text-color;
+  height: 19rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+#display, .clickable {
+  height: $standard-height;
+}
+
+// individual rectangles within calculator
+
 #display {
   background-color: $black-color;
-  // also border
+
+  // font-family: 'Orbitron', sans-serif;
+  // font-size: 1.4rem;
+  // font-weight: 400;
+
+  font-family: 'Bitwise', Monaco, monospace;
+  font-size: 1.8rem;
+  // font-weight: 200; // does this do anything?
+  color: #66ff00;
+
+  padding-right: 5%;
+  padding-top: $standard-height / 7; // vertical centering of Bitwise font
+  text-align: right;
+  width: 100%;
+}
+
+.clickable {
+  border: 1px solid $border-black;
+  padding-top: $standard-height / 4; // vertical centering of Open Sans font
 }
 
 #clear {
   background-color: $clear-color;
+  width: $double-width;
 }
 
 #equals {
   background-color: $equals-color;
-}
-
-.operator {
-  background-color: $operator-color;
-}
-
-#decimal {
-  background-color: $decimal-color;
+  width: $double-width;
 }
 
 .number {
   background-color: $number-color;
+  width: $standard-width;
 }
+
+#zero { // override number for width
+  width: $double-width;
+}
+
+#divide {
+  // width: 25%;
+}
+
+#multiply {
+  // width: 25%;
+}
+
+#subtract {
+  // width: 25%;
+}
+
+#add {
+  // width: 25%;
+}
+
+.operator {
+  background-color: $operator-color;
+  width: $standard-width;
+}
+
+.operator, #equal {
+  font-size: 1.1rem;
+}
+
+#decimal {
+  background-color: $decimal-color;
+  width: $standard-width;
+}
+
+// tweaks for various device sizes
 
 // phone/default
 
-body { // NO!! must use container for calc, and header/footer is not in it.
+#outer-container {
   width: 95%;
   margin: 0 auto;
 }
 
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 641px) { // tablet (and cascades to desktop)
 
-// tablet-specific rulesets go here
+  #outer-container {
+    width: 20%;
+  }
 
 } /*end of media query */
 
 @media only screen and (min-width: 1141px) {
   // desktop-specific rulesets go here
 
-  body {
-    width: 25%;
-  }
   
-  } /*end of media query */
+} /*end of media query */
