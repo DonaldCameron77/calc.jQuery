@@ -75,18 +75,22 @@ body {
 
   font-family: 'Bitwise', Monaco, monospace;
   font-size: 1.8rem;
-  // font-weight: 200; // does this do anything?
   color: #66ff00;
 
   padding-right: 5%;
-  padding-top: $standard-height / 7; // vertical centering of Bitwise font
+  padding-top: $standard-height / 5; // vertical centering of Bitwise font
   text-align: right;
   width: 100%;
 }
 
-.clickable {
+.clickable { // clickables are all buttons
   border: 1px solid $border-black;
-  padding-top: $standard-height / 4; // vertical centering of Open Sans font
+  color: $text-color;
+  font-size: 1.1rem;
+}
+
+.clickable:hover {
+  border-color: LightGrey;
 }
 
 #clear {
@@ -130,7 +134,7 @@ body {
 }
 
 .operator, #equal {
-  font-size: 1.1rem;
+  // font-size: 1.1rem;
 }
 
 #decimal {
@@ -143,14 +147,15 @@ body {
 // phone/default
 
 #outer-container {
-  width: 95%;
+  // width: 95%;
+  width: 375px;
   margin: 0 auto;
 }
 
 @media only screen and (min-width: 641px) { // tablet (and cascades to desktop)
 
   #outer-container {
-    width: 20%;
+    // width: 20%;
   }
 
 } /*end of media query */
