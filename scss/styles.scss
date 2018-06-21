@@ -1,4 +1,7 @@
-// boilerplate
+// some layout ideas were inspired by
+// https://medium.freecodecamp.org/how-to-build-an-html-calculator-app-from-scratch-using-javascript-4454b8714b98
+
+// CSS boilerplate
 
 /*-----Prevents iPhone from resizing in landscape mode -----*/
 /* html {-webkit-text-size-adjust: none; } */
@@ -10,11 +13,81 @@ html {-webkit-text-size-adjust: 100%; } /* see J.Seric foundation article on why
 /*--------- stop Chrome from putting blue outline around selected clicked items --------*/
 :focus { outline: 0; }
 
+/************************* j seric reset *************************/
+
+/* substitute for normalize and various resets, as per Jayden Seric:
+ * http://jaydenseric.com/blog/forget-normalize-or-resets-lay-your-own-css-foundation */
+
+ html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font: 16px/1 sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+figure,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+main,
+li {
+  display: block;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-size: inherit;
+}
+strong {
+  font-weight: bold;
+}
+a,
+button {
+  color: inherit;
+  transition: .3s;
+}
+a {
+  text-decoration: none;
+}
+button {
+  overflow: visible;
+  border: 0;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  cursor: pointer;
+}
+::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+:focus {
+  outline: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+/************************* end j seric reset *********************/
+
 html, body {
   user-select: none;
 }
-
-// we should insert a reset here (?)
 
 // computer (checkbook) font for display
 /* Bitwise checkbook font for header h1 */
@@ -35,9 +108,12 @@ $number-color: #4D4D4D;
 $decimal-color: $number-color;
 $text-color: white;
 
-// sizes
+// TODO - review this approach to sizes
+// sizes - is this grid-idiomatic for setting div/button sizes within cells?
+// Also -- TODO/BUG - put display outside the grid!
 $standard-height: 16.66%; // 1/6 of the total, with a little slop
 $standard-width: 25%;
+$double-height: $standard-height * 2;
 $double-width: $standard-width * 2;
 
 body {
@@ -46,28 +122,24 @@ body {
   text-align: center;
 }
 
+body h2 {
+  font-size: 1.5rem;
+  padding-bottom: 1.25rem;
+  padding-top: 1.5rem;
+}
+
 // calculator proper - excludes heading and footer
 
 #calculator {
   border: 5px solid $border-black;
   border-radius: 5px;
   color: $text-color;
-  height: 19rem;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 25rem;
 }
-
-
-#display, .clickable {
-  height: $standard-height;
-}
-
-// individual rectangles within calculator
 
 #display {
   background-color: $black-color;
+  color: #66ff00; // need better digital green font color
 
   // font-family: 'Orbitron', sans-serif;
   // font-size: 1.4rem;
@@ -75,41 +147,56 @@ body {
 
   font-family: 'Bitwise', Monaco, monospace;
   font-size: 1.8rem;
-  color: #66ff00;
+  height: $standard-height; // parent is calculator body
 
   padding-right: 5%;
-  padding-top: $standard-height / 5; // vertical centering of Bitwise font
+  padding-top: $standard-height / 2.5; // vertical centering of Bitwise font with magic fudge factor
   text-align: right;
   width: 100%;
 }
 
+#grid-container {
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // magic number 4 for number of columns
+  grid-template-rows: repeat(5, 1fr); // magic number 5 for number of rows
+  height: 100%; // needed to set button (.clickable) dimensions
+  height: $standard-height * 5; // 5 rows
+}
+
+// individual rectangles (buttons) within calculator
+
 .clickable { // clickables are all buttons
   border: 1px solid $border-black;
   color: $text-color;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  height: 100%;
+  width: 100%;
 }
 
 .clickable:hover {
   border-color: LightGrey;
 }
 
-#clear {
+#clear, #clear-input {
   background-color: $clear-color;
-  width: $double-width;
 }
 
 #equals {
   background-color: $equals-color;
-  width: $double-width;
+  // width: $double-width;
+  grid-column: -2; // why is this not redundant
+  grid-row: 4 / 6; // same as 4 / span 2?
 }
 
 .number {
   background-color: $number-color;
-  width: $standard-width;
+  // width: $standard-width;
 }
 
 #zero { // override number for width
-  width: $double-width;
+  grid-column: 1 / 3;
+  // width: $double-width; // needed?
 }
 
 #divide {
@@ -130,7 +217,7 @@ body {
 
 .operator {
   background-color: $operator-color;
-  width: $standard-width;
+  // width: $standard-width;
 }
 
 .operator, #equal {
@@ -139,15 +226,21 @@ body {
 
 #decimal {
   background-color: $decimal-color;
-  width: $standard-width;
+  // width: $standard-width;
+}
+
+#decimal, #add {
+  font-size: 1.8rem; // otherwise too small since they're not alphanumeric
+}
+#subtract, #equal {
+  font-size: 2.0rem; // otherwise too small since they're not alphanumeric
 }
 
 // tweaks for various device sizes
 
 // phone/default
 
-#outer-container {
-  // width: 95%;
+#outer-container { // could be centered with flex instead
   width: 375px;
   margin: 0 auto;
 }

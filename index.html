@@ -3,8 +3,8 @@
 <html lang="en">
   
 <head>
-  <title>Calculator (FCC Beta) (jQuery)</title>
-  <meta name="description" content="FCC Beta Calculator Challenge (using jQuery)" />
+  <title>Calculator (FCC JS Libaries Project) - jQuery version</title>
+  <meta name="description" content="FCC JS Libs Calculator Challenge (jQuery version)" />
   <meta charset="utf-8">
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,32 +24,38 @@
 <body>
 
   <main id="outer-container">
-    <h2>JavaScript Calculator freeCodeCamp Challenge</h2>
+    <h2>JavaScript Calculator freeCodeCamp Challenge (jQuery)</h2>
 
     <section id="calculator">
-      <div id="display">0</div>
 
-      <button type="button" class="clickable" id="clear">AC</button>
-      <button type="button" class="clickable" id="equals">=</button>
+      <article id="display">0</article>
 
-      <button type="button" class="clickable number" id="seven">7</button>
-      <button type="button" class="clickable number" id="eight">8</button>
-      <button type="button" class="clickable number" id="nine">9</button>
-      <button type="button" class="clickable operator" id="divide">/</button>
+      <article id="grid-container">
+        <button type="button" class="clickable" id="clear-input">CE</button>
+        <button type="button" class="clickable" id="clear">AC</button>
+        <button type="button" class="clickable operator" id="divide">/</button>
+        <button type="button" class="clickable operator" id="multiply">X</button>
+  
+        <button type="button" class="clickable number" id="seven">7</button>
+        <button type="button" class="clickable number" id="eight">8</button>
+        <button type="button" class="clickable number" id="nine">9</button>
+        <button type="button" class="clickable operator" id="subtract">-</button>
+        
+        <button type="button" class="clickable number" id="four">4</button>
+        <button type="button" class="clickable number" id="five">5</button>
+        <button type="button" class="clickable number" id="six">6</button>
+        <button type="button" class="clickable operator" id="add">+</button>
+  
+        <button type="button" class="clickable number" id="one">1</button>
+        <button type="button" class="clickable number" id="two">2</button>
+        <button type="button" class="clickable number" id="three">3</button>
+        <button type="button" class="clickable" id="equals">=</button>
+  
+        <button type="button" class="clickable number" id="zero">0</button>
+        <button type="button" class="clickable" id="decimal">.</button>
 
-      <button type="button" class="clickable number" id="four">4</button>
-      <button type="button" class="clickable number" id="five">5</button>
-      <button type="button" class="clickable number" id="six">6</button>
-      <button type="button" class="clickable operator" id="multiply">X</button>
-
-      <button type="button" class="clickable number" id="one">1</button>
-      <button type="button" class="clickable number" id="two">2</button>
-      <button type="button" class="clickable number" id="three">3</button>
-      <button type="button" class="clickable operator" id="subtract">-</button>
-
-      <button type="button" class="clickable number" id="zero">0</button>
-      <button type="button" class="clickable" id="decimal">.</button>
-      <button type="button" class="clickable operator" id="add">+</button>
+      </article> <!-- grid-container -->
+      
     </section> <!-- calculator -->
   
     <!-- must stick footer to bottom on desktop
