@@ -100,6 +100,7 @@ html, body {
 // colors
 $black-color: black;
 $border-black: #303030;
+// $border-black: #788080; // dark teal slate.  Would like silver gradient all around
 $clear-color: #AC3939;
 $equals-color: #004466;
 $operator-color: #666666;
@@ -234,6 +235,11 @@ body h2 {
 }
 #subtract, #equal {
   font-size: 2.0rem; // otherwise too small since they're not alphanumeric
+}
+
+footer {
+  font-weight: 600;
+  padding-top: 1rem; // absent sticky footer stuff we'll need
 }
 
 // tweaks for various device sizes
