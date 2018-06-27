@@ -1,79 +1,119 @@
-
-/*
-    Project: freeCodeCamp Calculator (front-end libraries/platforms project)
-    File: scripts.js
-    Author: Donald Cameron
-    Created: May-June 2018
-
-    Credit: this realization of a calculator in JS and jQuery was inspired by some of Jennifer
-    Bland's ideas in https://medium.freecodecamp.org/programming-a-calculator-8263966a8019
-*/
-
-// Separate parsing from expression evaluation.  By "parsing" we mean "lexical
-// analysis", as there are some challenges, like allowing only a single leading
-// zero, and throwing away all but the rightmost in a sequence of operators.
-
-// const isOperator = (token) => {
-//   const operators = '+-*/'
-//   return operators.includes(token);
-// }
-
-// the methods herein have nested functions which want to access properties of the
-// enclosing object.  For simplicity these nested functions are realized as arrow
-// functions so that 'this' will be bound lexically.
+'use strict';
 
 const inputState = {
-  inbuf: '',  // if we're collecting any characters (number, other?) they go into here
+  inbuf: '0',  // if we're collecting any characters (number, other?) they go into here
   hasDecimal: false,
-  leftOpnd: 0,
-  rightOpnd: 0,
+  leftOpnd: null, // do these need to be null to distinguish when there is or isn't valid contents?
+  rightOpnd: null, // not convinced we need this since we have inbuf
   operator: '',
-
-  updateDisplay: function() {
-    display = document.getElementById("display");
-    display.innerHTML = this.inbuf;
+  
+  updateDisplay: function(buf) {
+    const display = document.getElementById("display");
+    display.innerHTML = buf;
   },
+  
+  handleButtonClick : function(c) {
 
-  nextChar : function(c) {
-
+    console.log('*****');
+    console.log('handleButtonClick - button =', c);
+  
     const handleNumeric = (c) => {
-      // debugger;
+      // append c to inbuf except
+      //  throw c away if there are too many digits for the display,
+      //  or if c is a '.' and inbuf already has one,
+      //  or if c is a redundant leading zero
+      const MAXINBUF = 16;
+      if (this.inbuf.length >= MAXINBUF) {
+        return;
+      }
+
       if (c === '.') {
         if (this.hasDecimal) {
           return; // discard any decimal other that the first
         }
         else {
-          this.hasDecimal = true;
+          this.hasDecimal = true; // remember there is a decimal point in buffer
         }
       }
+
       if (this.inbuf === '0' && c !== '.') {
         this.inbuf = ''; // suppress leading zero unless "0."
       }
-      this.inbuf += c;
-      this.updateDisplay();
-    }
 
+      this.inbuf += c;
+      this.updateDisplay(this.inbuf);
+    }; // handleNumeric
+    
+    const finalizeOpnd = () => {
+      if (this.leftOpnd === null) {
+        this.leftOpnd = Number(this.inbuf);
+      }
+      else if (this.rightOpnd === null) {
+        this.rightOpnd = Number(this.inbuf);
+      }
+      this.inbuf = '0';
+      this.hasDecimal = false;
+    };
+    
+    const calculate = (leftOpnd, operator, rightOpnd) => {
+      console.log("calculate: leftOpnd =", leftOpnd, "operator =", operator, "rightOpnd =", rightOpnd);
+      switch (operator) {
+        case '+': return leftOpnd + rightOpnd;
+        case '-': return leftOpnd - rightOpnd;
+        case 'X': return leftOpnd * rightOpnd;
+        case '/': return leftOpnd / rightOpnd;
+      }
+    }
+        
+    const handleOperatorOrEquals = (c) => {
+      // infix operator which may terminate collection of number elements in
+      // inbuf, but may also refer to existing left operand, finalize previous infix
+      // binary expression, or follow equals which will have already stored a result
+
+      // debugger;
+
+      finalizeOpnd();
+      if (this.operator === '') {
+        this.operator = c;
+      }
+      else {
+        this.leftOpnd = calculate(this.leftOpnd, this.operator, this.rightOpnd);
+        this.rightOpnd = null;
+        this.updateDisplay(this.leftOpnd.toString());
+        this.operator = (c === '=' ? '' : c);
+      }
+    };
+    
     if ((c >= '0' && c <= '9') || c === '.') {
       handleNumeric(c);
+    }
+    else if (c === '+' ||c === '-' ||c === 'X' ||c === '/' ||c === '=') {
+      handleOperatorOrEquals(c);
     }
     else if (c === 'AC') {
       this.reset();
     }
     else {
       console.log("UNIMPLEMENTED BUTTION:", c);
-    }
+    } 
 
-    // if ((c === '+' || c === '-' || c === ))
-
+    // DEBUG
+    console.log("handleButtonClick:",
+      "button = ", c,
+      "display =", document.getElementById("display").innerHTML,
+      "inbuf =", this.inbuf,
+      "leftOpnd =", this.leftOpnd,
+      "rightOpnd =",this.rightOpnd,
+      "operator =", this.operator
+    );
   },
-
-  reset : function() {
-    console.log("reset:");
+  
+  reset : function() { // leaving this unnested for the time being
     this.inbuf = '0';
     this.hasDecimal = false;
     this.operator = '';
-    this.leftOpnd = this.rightOpnd = 0; // imagining that these should be numeric
-    this.updateDisplay();
+    this.leftOpnd = this.rightOpnd = null; // imagining that these should be numeric
+    this.updateDisplay(this.inbuf);
   }
 };
 
@@ -81,9 +121,6 @@ $(document).ready(() => {
   $("button").on('click', (e) => {
     // debugger;
     // console.log('e', e.target.innerHTML);
-    inputState.nextChar(e.target.innerHTML);
+    inputState.handleButtonClick(e.target.innerHTML);
   });
 });
-
-
-
